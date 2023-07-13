@@ -175,6 +175,7 @@ p,span,a,input,button,option,label,b{
 }
 .account{
     flex: 0.3;
+    display: inline-block;
 }
 
 .cart-button-link{
@@ -1803,7 +1804,6 @@ span.orig-price{
     }
 
     .header{
-        display: block;
         margin-bottom: 5px;
         height: 65px;
         backdrop-filter: blur(40px) ;
@@ -1862,6 +1862,9 @@ span.orig-price{
     }
     .product p{
         line-height: 13px;
+    }
+    .account{
+        height: 30px;
     }
     .cart-products{
         padding: 10px;
