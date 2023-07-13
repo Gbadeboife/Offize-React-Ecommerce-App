@@ -1,32 +1,13 @@
 import React from "react";
 import {AdvancedImage} from '@cloudinary/react';
-import {Cloudinary} from "@cloudinary/url-gen";
 import { Link } from "react-router-dom";
 import { useState,useEffect } from "react";
-import { CardElement, useStripe, useElements, Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js'
 
-
-const stripePromise = loadStripe('pk_test_51NP6OKJ7ASKs4YiQNNnlXYKfwKW61Kv5hjrKggH5UjokFqI45ImziNo8t7JdyIzX8A833FO2NDNQmZPFW6sXE4kl008llrPcd5');
-
-
-function Cart({cartItems,removeFromCart}){
+function Cart({cartItems,removeFromCart,cld}){
 
       const [subTotal,setSubTotal]=useState()
       const [summaryStatus,setSummaryStatus]=useState()
       const [successMessage,setSuccessMessage]=useState(false)
-
-
-      function displaySuccessMessage(){
-            setTimeout(()=>{setSuccessMessage(true)},200)
-            setTimeout(()=>{setSuccessMessage(false)},2000)
-      }
-
-      const cld = new Cloudinary({
-        cloud: {
-          cloudName: 'dhdmchgsh'
-        }
-      })
 
       useEffect(()=>{
         if(cartItems.length > 0){
@@ -43,8 +24,12 @@ function Cart({cartItems,removeFromCart}){
       }
       )
 
+      function displaySuccessMessage(){
+            setTimeout(()=>{setSuccessMessage(true)},200)
+            setTimeout(()=>{setSuccessMessage(false)},2000)
+      }
 
-
+      
     return(
         <div className="cart">
             <div className="cart-products">
@@ -101,11 +86,7 @@ function Cart({cartItems,removeFromCart}){
                 <div className="cart-summary">
                     <h4>CART SUMMARY</h4>
                     <p>Subtotal<span>${subTotal}.99</span></p>
-                        <form >
-                            <button type="submit" >
-                            </button>
-                        </form>
-
+                    <Link>Checkout (${subTotal}.99)</Link>
                     <div className="returns">
                         <h4>Returns are easy</h4>
                         <p>Free return within 15 days for eligible items.</p>

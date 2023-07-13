@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {AdvancedImage} from '@cloudinary/react';
-import {Cloudinary} from "@cloudinary/url-gen";
 import {useParams} from "react-router-dom";
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import {faStar as faRegStar} from '@fortawesome/free-regular-svg-icons';
@@ -9,16 +8,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 
-function Productpage({addToCart,list,removeFromCart}){
-  
-    const cld = new Cloudinary({
-        cloud: {
-          cloudName: 'dhdmchgsh'
-        }
-      });
+function Productpage({addToCart,list,removeFromCart,cld}){
       const {name}=useParams()
-
       const [successMessage,setSuccessMessage]=useState(false)
+      
       function displaySuccessMessage(){
         setTimeout(()=>{setSuccessMessage(true)},200)
         setTimeout(()=>{setSuccessMessage(false)},2000)

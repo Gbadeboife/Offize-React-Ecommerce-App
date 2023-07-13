@@ -1,19 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {Cloudinary} from "@cloudinary/url-gen";
 import {AdvancedImage} from '@cloudinary/react';
 
-function Home(){
+function Home({cld}){
     const [firstHoverStatus,setFirstHoverStatus]=useState(false)
     const [secondHoverStatus,setSecondHoverStatus]=useState(false)
-    const cld = new Cloudinary({
-        cloud: {
-          cloudName: 'dhdmchgsh'
-        }
-      });
-      var bannerImage=cld.image(`office ecommerce/home page/banner`);
-      var aboutImage=(num)=>{return cld.image(`office ecommerce/home page/works-${num}`)};
-      var setupImage=(type)=>{return cld.image(`office ecommerce/home page/${type}`) }
+
+    var bannerImage=cld.image(`office ecommerce/home page/banner`);
+    var aboutImage=(num)=>{return cld.image(`office ecommerce/home page/works-${num}`)};
+    var setupImage=(type)=>{return cld.image(`office ecommerce/home page/${type}`) }
 
     return(
     <div className="home">
@@ -52,6 +47,7 @@ function Home(){
                 </div>
               </div>
         </div>
+
         <div className="setup">
             <h2>Build your setup<br/>based on what suits you</h2>
             <section>
@@ -84,6 +80,7 @@ function Home(){
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae aliquid veritatis itaque nostrum quis consectetur eius blanditiis eveniet commodi, atque accusantium ducimus quos.illum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laboru</p>
             </div>
         </div>
+
         <div className="services">
             <h2>Our Services</h2>
             <div id="services">
@@ -92,6 +89,7 @@ function Home(){
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae aliquid veritatis itaque nostrum quis consectetur eius blanditiis eveniet commodi, atque accusantium ducimus quos.illum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laboru</p>
             </div>
         </div>
+
         <div className="works">
             <h2>Some of our works</h2>
             <div id="works">
@@ -107,7 +105,6 @@ function Home(){
             </div>
         </div>
 
-        
     </div>
     )
 }

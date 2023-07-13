@@ -1,20 +1,15 @@
 import React from "react";
 import {AdvancedImage} from '@cloudinary/react';
-import {Cloudinary} from "@cloudinary/url-gen";
 import {Link} from "react-router-dom"
 import {useParams} from "react-router-dom";
 import { useState,useEffect} from "react";
 
 
 
-function Preference ({list}){
-    const cld = new Cloudinary({
-        cloud: {
-          cloudName: 'dhdmchgsh'
-        }
-      });
+function Preference ({list,cld}){
       const[filteredProducts,setFilteredProducts]=useState([])
       const {preference}=useParams()
+
       useEffect(()=>{
         switch (preference){
           case 'work':
@@ -28,9 +23,9 @@ function Preference ({list}){
 
     return(
       <div>
-          <div className="dir">
-            <span><Link to='/'>Home /</Link>  {preference.charAt().toUpperCase()}{preference.slice(1)} products</span>
-          </div>
+        <div className="dir">
+          <span><Link to='/'>Home /</Link>  {preference.charAt().toUpperCase()}{preference.slice(1)} products</span>
+        </div>
 
         <div className="product-list">
         {filteredProducts.map((item)=>{

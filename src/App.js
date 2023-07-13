@@ -11,28 +11,13 @@ import Preference from './components/Preference';
 import Subscribe from './components/Subscribe';
 import Footer from './components/Footer';
 import Productpage from "./components/Productpage";
+import {Cloudinary} from "@cloudinary/url-gen";
 import {v4 as uuid} from 'uuid'
 
 
 
-import Payment from './components/payment';
 
 function App (){
-    const [cartItems,setCartItems]=useState([])
-    const [categ,setCateg]=useState()
-    
-    function ScrollToTop() {
-        const { pathname } = useLocation();
-      
-        useEffect(() => {
-          window.scrollTo(0, 0);
-        }, [pathname]);
-      
-        return null;
-      }
-      
-      const ScrollToTopWithRouter = withRouter(ScrollToTop);
-
     const [products,setProducts]=useState([
         {   
             name:'High Resolution Monitor',
@@ -440,13 +425,35 @@ function App (){
         
     ])
 
+    // Initializing a Cloudinary client object using the Cloudinary JavaScript SDK
+    const cld = new Cloudinary({
+        cloud: {
+          cloudName: 'dhdmchgsh'
+        }
+      })
+
+    // Function which scrolls page to top whenever route is changed
+    function ScrollToTop() {
+        const { pathname } = useLocation();
+      
+        useEffect(() => {
+          window.scrollTo(0, 0);
+        }, [pathname]);
+
+        return null;
+      }
+      
+    const ScrollToTopWithRouter = withRouter(ScrollToTop);
+
+    // Array to store all items added to cart
+    const [cartItems,setCartItems]=useState([])
+
     const addToCart=(id)=>{
         setCartItems((prevState)=>[...prevState,
             products.find((item)=>item.id===id)
         ]);
     }
-
- 
+    
     const removeFromCart =(id)=>{
         setTimeout(()=>{
             setCartItems(cartItems.filter((item)=> item.id !== id))
@@ -455,26 +462,23 @@ function App (){
 
 
     return(
-        <div>
                 <Router>
-                    <Route path='/'><Header pickCateg={setCateg} list={products} cartAmt={cartItems.length}/></Route>
+                    <Route path='/'><Header cld={cld} list={products} cartAmt={cartItems.length} /></Route>
                 <div className="page">
                     <ScrollToTopWithRouter/>
-                    <Route exact path='/'><Home/></Route>
-                    <Route exact path='/'><Topselling list={products}/></Route>
+                    <Route exact path='/'><Home cld={cld}/></Route>
+                    <Route exact path='/'><Topselling cld={cld} list={products}/></Route>
                     <Route exact path='/'><Subscribe/></Route>
-                    <Route exact path='/shop'><Shop list={products} pickCateg={setCateg}/></Route>
-                    <Route exact path='/:preference products'><Preference list={products}/></Route>
-                    <Route exact path='/category'><Productlist list={products} category={categ} /></Route>
-                    <Route exact path='/product: :name'><Productpage list={products} addToCart={addToCart} removeFromCart={removeFromCart}/></Route>
-                    <Route exact path='/cartj'><Cart cartItems={cartItems}removeFromCart={removeFromCart} list={products}/></Route>
-                    <Route exact path='/cart'><Payment/></Route>
+                    <Route exact path='/shop'><Shop cld={cld} list={products}/></Route>
+                    <Route exact path='/:preference products'><Preference cld={cld} list={products}/></Route>
+                    <Route exact path='/category: :category'><Productlist cld={cld} list={products}/></Route>
+                    <Route exact path='/product: :name'><Productpage cld={cld} list={products} addToCart={addToCart} removeFromCart={removeFromCart}/></Route>
+                    <Route exact path='/cart'><Cart cld={cld} cartItems={cartItems}removeFromCart={removeFromCart} list={products} /></Route>
                 </div>
                     <Route path='/'><Footer/></Route>
                 </Router>
 
 
-        </div>
     )
 
 }

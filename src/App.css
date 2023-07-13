@@ -175,18 +175,15 @@ p,span,a,input,button,option,label,b{
 }
 .account{
     flex: 0.3;
-    display: inline-block;
 }
 
-.cart-button-link img{
-    height: 100%;
-}
 .cart-button-link{
     display: inline-block;
     height: 100%;
+    float: right;
+    width: 25px;
     color: rgba(0, 0, 0, 0.734);
     position: relative;
-    text-align: center;
 }
 .cart-icon{
     width: 22px;
@@ -200,6 +197,7 @@ p,span,a,input,button,option,label,b{
     font-weight: 700;
     display: inline-block;
     position: absolute;
+    text-align: center;
     height: 12px;
     line-height: 12px;
     width: 12px;
@@ -261,6 +259,7 @@ p,span,a,input,button,option,label,b{
 .links .dropdown-list li a{
     text-decoration: none;
     color: inherit;
+    display: block;
     z-index: 3;
     font-size: 14px;
 }

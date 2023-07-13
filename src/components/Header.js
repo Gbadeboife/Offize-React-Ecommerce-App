@@ -3,7 +3,6 @@ import { useState,useEffect,useRef} from 'react'
 import {Link} from 'react-router-dom'
 import logo from '../images/logo.png'
 import {AdvancedImage} from '@cloudinary/react';
-import {Cloudinary} from "@cloudinary/url-gen";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
@@ -12,17 +11,11 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
 
-function Header({pickCateg,list,cartAmt,ref}){
+function Header({list,cartAmt,cld}){
 
     const [search,setSearch]=useState('')
     const [menuOpen,setMenuOpen]=useState(false)
 
-    const cld = new Cloudinary({
-        cloud: {
-          cloudName: 'dhdmchgsh'
-        }
-      });
-    
 
       const divRef = useRef(null);
       useEffect(() => {
@@ -41,7 +34,6 @@ function Header({pickCateg,list,cartAmt,ref}){
     
     return(
            <div className='header-par'>
-
             <div className="header"  ref={divRef}>
                 <div className='menu-btn' >
                     <FontAwesomeIcon icon={faBars} onClick={()=>setMenuOpen(true)}/>
@@ -73,7 +65,7 @@ function Header({pickCateg,list,cartAmt,ref}){
                         </div>
 
                     </div>
-                    <ul className={menuOpen? 'links-ul open' : 'links-ul closed'  }>
+                    <ul className={menuOpen? 'links-ul open' : 'links-ul closed'}>
                         <div className='menu-btn'>
                             <FontAwesomeIcon icon={faClose} onClick={()=>setMenuOpen(false)}/>
                         </div>
@@ -85,23 +77,23 @@ function Header({pickCateg,list,cartAmt,ref}){
                             <p className='header-link'>Categories <FontAwesomeIcon className='ang-down' icon={faAngleDown}/></p>
 
                                 <ul className='dropdown-list'>
-                                    <li onClick={()=>{pickCateg('equipment');setMenuOpen(false)}}>
-                                        <Link to='category'>
+                                    <li onClick={()=>{setMenuOpen(false)}}>
+                                        <Link to='category: equipment'>
                                             PC Equipment
                                         </Link>
                                     </li>
-                                    <li onClick={()=>{pickCateg('accessories');setMenuOpen(false)}}>
-                                        <Link to='category' >
-                                            Accesories
+                                    <li onClick={()=>{setMenuOpen(false)}}>
+                                        <Link to='category: accessories' >
+                                            Accessories
                                         </Link>
                                     </li>
-                                    <li onClick={()=>{pickCateg('furniture');setMenuOpen(false)}}>
-                                    <Link to='category'>
+                                    <li onClick={()=>{setMenuOpen(false)}}>
+                                    <Link to='category: furniture'>
                                         Furniture
                                     </Link>
                                     </li>
-                                    <li onClick={()=>{pickCateg('audio');setMenuOpen(false)}}>
-                                    <Link to='category' >
+                                    <li onClick={()=>{setMenuOpen(false)}}>
+                                    <Link to='category: audio' >
                                         Audio Equipment
                                     </Link>
                                     </li>

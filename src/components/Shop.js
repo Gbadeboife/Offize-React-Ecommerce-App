@@ -2,19 +2,13 @@ import React from "react";
 import { useState,useEffect } from "react";
 import {Link} from "react-router-dom"
 import {AdvancedImage} from '@cloudinary/react';
-import {Cloudinary} from "@cloudinary/url-gen";
 import Productsfilter from "./Productsfilter";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faStar} from '@fortawesome/free-solid-svg-icons';
 import {faStar as faRegStar} from '@fortawesome/free-regular-svg-icons';
 
 
-function Shop({list}){
-      const cld = new Cloudinary({
-        cloud: {
-          cloudName: 'dhdmchgsh'
-        }
-      })
+function Shop({list,cld}){
 
       const [sortQuery,setSortQuery]=useState('')
       const [changedFilter,setChangedFilter]=useState('')
@@ -27,6 +21,7 @@ function Shop({list}){
         discount:'',
         rating:'',
       })
+
       function clearFilters(){
         setQueries({
           brand:'',
@@ -34,25 +29,12 @@ function Shop({list}){
           discount:'',
           rating:'',
         })
+        setSortQuery('')
       }
 
       function sortItems(e){
         setSortQuery(e.target.value)
       } 
-
-      useEffect(() => {
-          const filtered = products.filter((product) => {
-          const { brand, rating, price, discount } = queries;
-          const brandMatch = brand ? product.brand === brand : true;
-          const ratingMatch = rating ? parseFloat(product.rating) >= parseFloat(rating) : true;
-          const priceMatch = price ? parseFloat(product.price) <= parseFloat(price) : true;
-          const discountMatch = discount ? parseFloat(product.discount) >= parseFloat(discount) : true;
-    
-          return brandMatch && ratingMatch && priceMatch && discountMatch;
-        });
-        setFilteredProducts(filtered);
-      }, [queries]);
-
 
       useEffect(() => {
         switch(sortQuery){
@@ -71,21 +53,38 @@ function Shop({list}){
         }
       }, [sortQuery])
 
+
+      useEffect(() => {
+          const filtered = products.filter((product) => {
+          const { brand, rating, price, discount } = queries;
+          const brandMatch = brand ? product.brand === brand : true;
+          const ratingMatch = rating ? parseFloat(product.rating) >= parseFloat(rating) : true;
+          const priceMatch = price ? parseFloat(product.price) <= parseFloat(price) : true;
+          const discountMatch = discount ? parseFloat(product.discount) >= parseFloat(discount) : true;
+    
+          return brandMatch && ratingMatch && priceMatch && discountMatch;
+        });
+        setFilteredProducts(filtered);
+      }, [queries]);
+
+
     return(
         <div className="shop">
           <div className="dir">
             <span><Link to='/'>Home /</Link> Shop</span>
           </div>
+
           <section className="side-bar">
             <Productsfilter updateFilter={setQueries} setChangedFilter={setChangedFilter} selectedFilters={queries} clearFilters={clearFilters}/>
           </section>
+
           <section className="products">
             <div className="top-bar">
               <span>{filteredProducts.length} products found</span>
               <div>
                 <p>Sort by: </p>
-                <select onChange={sortItems}>
-                  <option disabled selected style={{display: 'none'}}></option>
+                <select onChange={sortItems} value={sortQuery}>
+                  <option disabled selected style={{display: 'none'}} value=''></option>
                   <option value='L-H'>Price: Low to High</option>
                   <option value='H-L'>Price: High to Low</option>
                   <option value='A-Z'>Name: A-Z</option>
@@ -93,9 +92,9 @@ function Shop({list}){
                 </select>
               </div>
             </div>
+
             <div className="prod-container">
               {filteredProducts.map((item)=>{
-
                 var myImage=cld.image(`office ecommerce/products/${item.categ}/${item.title}`);
                 const calcDisc=100 - parseInt(item.discount)
                 const origPrice=parseInt(parseInt(item.price) * 100 / calcDisc)
@@ -123,7 +122,6 @@ function Shop({list}){
                 )
             })}
               </div>
-
             </section>
 
     </div>

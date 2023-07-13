@@ -7,20 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Productsfilter({updateFilter,setChangedFilter,selectedFilters,clearFilters}){
 
-
-  function calcStars(e){
-    let stars = [];
-    let regStars= []
-    for(let i=1;i<= e ;i++){
-      stars.push(<FontAwesomeIcon icon={faStar} />);
-    }
-    for(let i=1;i<= 5-stars.length;i++){
-      regStars.push( <FontAwesomeIcon icon={faRegStar} />);
-    }
-    stars.push(regStars)
-    return stars 
-  }
-
     const changeBrand=(e)=>{
       updateFilter(prevState => ({...prevState,brand: e.target.value}))
       setChangedFilter('brand')
@@ -37,6 +23,19 @@ function Productsfilter({updateFilter,setChangedFilter,selectedFilters,clearFilt
     const changePrice=(e)=>{
       updateFilter(prevState => ({...prevState,price: e.target.value}))
       setChangedFilter('price')
+    }
+    
+    function calcStars(e){
+      let stars = [];
+      let regStars= []
+      for(let i=1;i<= e ;i++){
+        stars.push(<FontAwesomeIcon icon={faStar} />);
+      }
+      for(let i=1;i<= 5-stars.length;i++){
+        regStars.push( <FontAwesomeIcon icon={faRegStar} />);
+      }
+      stars.push(regStars)
+      return stars 
     }
 
     return(
