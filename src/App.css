@@ -247,8 +247,9 @@ p,span,a,input,button,option,label,b{
     padding: 10px 35px;
     border-radius: 20px;
     opacity: 0.8;
+    transition: color background-color opacity 0.3s;
     background-color: white;
-    transition: 0.4s ;
+    display: inline-block;
 }
 .home .landing article a:hover{
     opacity: 1;
@@ -351,7 +352,6 @@ p,span,a,input,button,option,label,b{
     position: relative;
     transition: transform 0.5s;
 }
-
 .setup-img:hover{
     transform: scale(1.2);
     filter: blur(1.2px) ;
@@ -1907,7 +1907,6 @@ span.orig-price{
         height: 35%;
         text-align: unset;
     }
-
 
     .cart-item .remove{
         margin: 0;

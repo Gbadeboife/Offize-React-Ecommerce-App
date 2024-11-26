@@ -2,6 +2,15 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {AdvancedImage} from '@cloudinary/react';
 
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+    
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+
+
+
+
 function Home({cld}){
     const [firstHoverStatus,setFirstHoverStatus]=useState(false)
     const [secondHoverStatus,setSecondHoverStatus]=useState(false)
@@ -9,6 +18,115 @@ function Home({cld}){
     var bannerImage=cld.image(`office ecommerce/home page/banner`);
     var aboutImage=(num)=>{return cld.image(`office ecommerce/home page/works-${num}`)};
     var setupImage=(type)=>{return cld.image(`office ecommerce/home page/${type}`) }
+
+
+    gsap.registerPlugin(useGSAP,ScrollTrigger);
+
+    useGSAP(()=>{
+        gsap.from('.landing article a', {
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+        })
+
+        const tl1= gsap.timeline({
+            scrollTrigger: {
+                trigger: '.experience',
+                start: 'top 90%',
+            }
+        })
+
+        tl1.from('.experience h2', {
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+        })
+        .from('.exp', {
+            y: 20,
+            opacity:0,
+            duration:0.7
+        })
+
+
+        const tl2= gsap.timeline({
+            scrollTrigger: {
+                trigger: '.setup',
+                start: 'top 90%',
+            }
+        })
+        
+        tl2.from('.setup h2', {
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+        })
+        .from('.setup section', {
+            y: 20,
+            opacity:0,
+            duration: 0.7
+        })
+
+
+        const tl3= gsap.timeline({
+            scrollTrigger: {
+                trigger: '.about',
+                start: 'top 90%',
+            }
+        })
+        
+        tl3.from('.about h2', {
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+        })
+        .from('.about div', {
+            y: 20,
+            opacity:0,
+            duration:0.7
+        })
+
+
+        const tl4= gsap.timeline({
+            scrollTrigger: {
+                trigger: '.services',
+                start: 'top 90%',
+            }
+        })
+        
+        tl4.from('.services h2', {
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+        })
+        .from('.services div', {
+            y: 20,
+            opacity:0,
+            duration:0.7
+        })
+
+        
+        const tl5= gsap.timeline({
+            scrollTrigger: {
+                trigger: '.works',
+                start: 'top 90%',
+            }
+        })
+        
+        tl5.from('.works h2', {
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+        })
+        .from('#works', {
+            y: 20,
+            opacity:0,
+            duration:0.7
+        })
+
+        
+    })
+
+
 
     return(
     <div className="home">

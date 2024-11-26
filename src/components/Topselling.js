@@ -5,9 +5,34 @@ import {faStar} from '@fortawesome/free-solid-svg-icons';
 import {faStar as faRegStar} from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+    
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+
 
 function Topselling ({list,cld}){
     const slicedList=list.slice(0,5)
+
+    gsap.registerPlugin(useGSAP,ScrollTrigger);
+
+    useGSAP(()=>{
+        const tl1= gsap.timeline({
+            scrollTrigger: {
+                trigger: '.top-selling',
+                start: 'top 90%',
+            }
+        })
+
+        tl1.from('.top-selling h2', {
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+        })
+
+    })
+
     return(
       <div id="top-selling">
         <h2>Top selling items</h2>

@@ -6,8 +6,11 @@ import {useParams} from "react-router-dom";
 
 
 function Productlist ({list,cld}){
-      const {category}=useParams()
-      const filteredProducts=list.filter((product)=> product.categ===category)
+    const {category}=useParams()
+    const filteredProducts=list.filter((product)=> product.categ===category)
+
+
+    
 
     return(
       <div>
