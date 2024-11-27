@@ -24,9 +24,9 @@ function Home({cld}){
 
     useGSAP(()=>{
         gsap.from('.landing article a', {
-            y: 20,
+            y: 40,
             opacity: 0,
-            duration: 0.7,
+            duration: 0.5,
         })
 
         const tl1= gsap.timeline({
@@ -37,12 +37,12 @@ function Home({cld}){
         })
 
         tl1.from('.experience h2', {
-            y: 20,
+            y: 40,
             opacity: 0,
-            duration: 0.7,
+            duration: 0.5,
         })
         .from('.exp', {
-            y: 20,
+            y: 40,
             opacity:0,
             duration:0.7
         })
@@ -56,14 +56,14 @@ function Home({cld}){
         })
         
         tl2.from('.setup h2', {
-            y: 20,
+            y: 40,
             opacity: 0,
-            duration: 0.7,
+            duration: 0.5,
         })
         .from('.setup section', {
-            y: 20,
+            y: 40,
             opacity:0,
-            duration: 0.7
+            duration: 0.5
         })
 
 
@@ -75,12 +75,12 @@ function Home({cld}){
         })
         
         tl3.from('.about h2', {
-            y: 20,
+            y: 40,
             opacity: 0,
-            duration: 0.7,
+            duration: 0.5,
         })
         .from('.about div', {
-            y: 20,
+            y: 40,
             opacity:0,
             duration:0.7
         })
@@ -94,12 +94,12 @@ function Home({cld}){
         })
         
         tl4.from('.services h2', {
-            y: 20,
+            y: 40,
             opacity: 0,
-            duration: 0.7,
+            duration: 0.5,
         })
         .from('.services div', {
-            y: 20,
+            y: 40,
             opacity:0,
             duration:0.7
         })
@@ -113,12 +113,12 @@ function Home({cld}){
         })
         
         tl5.from('.works h2', {
-            y: 20,
+            y: 40,
             opacity: 0,
-            duration: 0.7,
+            duration: 0.5,
         })
         .from('#works', {
-            y: 20,
+            y: 40,
             opacity:0,
             duration:0.7
         })

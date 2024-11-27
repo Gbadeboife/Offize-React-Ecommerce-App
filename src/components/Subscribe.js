@@ -19,9 +19,9 @@ function Subscribe(){
         })
 
         tl1.from('.subscribe h2', {
-            y: 20,
+            y: 40,
             opacity: 0,
-            duration: 0.7,
+            duration: 0.5,
         })
 
     })
